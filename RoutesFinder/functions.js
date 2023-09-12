@@ -190,6 +190,7 @@ const Func = {
     get: {
       //get airport objects in tools
       airport: (query) => {
+        // console.log(query.toLowerCase());
         let data = AirportData[AirportID[Func.data.checkQuery(query)]];
         if (!data) return false;
         return new Airport(
@@ -470,21 +471,21 @@ const Func = {
       return obj;
     },
     researchFetch: async (dep, rwy, maxDist, minDist) => {
+      // console.log(dep, AircraftData[AircraftID[dep]][6], "hehe");
       let res = [];
       try {
-        for (let i = maxDist; i >= minDist; i -= 200) {
-          // let url = `https://www.airline4.net/api/?access_token=g53urfGFDtreHnXdfWjYTrcGR:465JHTYRdGJSAHjfgcxE21312H&fields=research&dep_icao=${dep}&min_runway=${rwy}&max_distance=${i}`
-          let url = `https://cdn.jsdelivr.net/gh/itswhocares/temp@master/${dep}.json`;
-          let { status, route } = await fetch(url).then((response) => {
-            const res = response.json();
-            return res;
-          });
-          if (status.request != "success") {
-            return [false, status.description];
-          }
-          res = res.concat(route.data);
+        // let url = `https://www.airline4.net/api/?access_token=g53urfGFDtreHnXdfWjYTrcGR:465JHTYRdGJSAHjfgcxE21312H&fields=research&dep_icao=${dep}&min_runway=${rwy}&max_distance=${i}`
+        let url = `https://cdn.jsdelivr.net/gh/itswhocares/temp@master/${dep}.json`;
+        let { status, route } = await fetch(url).then((response) => {
+          const res = response.json();
+          return res;
+        });
+        if (status.request != "success") {
+          return [false, status.description];
         }
+        res = res.concat(route.data);
       } catch (err) {
+        console.log(dep);
         throw "Invalid ICAO OR Hub Data not aviailable";
       }
 

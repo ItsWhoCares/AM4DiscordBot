@@ -746,6 +746,7 @@ const Tools = {
     }
 
     let dep = Func.data.get.airport(departure);
+    //console.log(dep, departure);
     //console.log($("#inp-dep").val())
     let ac = Func.data.get.paxcargo(aircraft);
     let acid = {
@@ -966,6 +967,7 @@ const Tools = {
       //   "B747-400D": 7400000,
       // };
       let isCargo = ac.cap > 700;
+      if (isCargo) throw "Cargo Not Supported";
       if (!isCargo) {
         if (!specificData[1][3]) {
           i++;
