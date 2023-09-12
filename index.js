@@ -7,8 +7,8 @@ const {
   ApplicationCommand,
 } = require("discord.js");
 const Tools = require("./RoutesFinder/Tools.js");
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
