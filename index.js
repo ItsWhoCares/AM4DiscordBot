@@ -7,6 +7,38 @@ const {
   ApplicationCommand,
 } = require("discord.js");
 const Tools = require("./RoutesFinder/Tools.js");
+
+const app = require("express")();
+
+function attachFSLogger(filePath) {
+  // remember the old log method
+  const oldLog = console.log; // remove this line if you only want to log into the file
+
+  // override console.log
+  console.log = (...messages) => {
+    // log the console message immediately as usual
+    oldLog.apply(console, messages); // remove this line if you only want to log into the file
+
+    // asynchronously append to the file log
+    fs.appendFile(filePath, messages.join("\n") + "\n", (err) => {
+      if (err) throw err;
+    });
+  };
+}
+
+attachFSLogger("./logs.txt");
+
+const fs = require("fs");
+
+app.get("/", (req, res) => {
+  const data = fs.readFileSync("./logs.txt");
+  res.send(data.toString());
+});
+
+const port = process.env.port || 8080;
+
+app.listen(port, () => console.log(`logs at port http://localhost:${port}`));
+
 // const dotenv = require("dotenv");
 // dotenv.config();
 
