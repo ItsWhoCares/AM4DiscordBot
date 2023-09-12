@@ -20,25 +20,21 @@ function formatMsg(msg, i) {
     -> ${msg.flpd} Flights/${msg.reputation}% Rep/$${msg.fuel} Fuel/$${
     msg.co2
   } CO2**
-  
-    Mode: ${msg.mode}, ${msg.speed}
+
+    Distance: ${msg.distance}
+    Aircraft: ${msg.aircraft}, ${msg.speed}
+    Mode: ${msg.mode}
   
     __TICKET & CONFIG:__  
-    Route Demand:   <:yy:1135253605939675138> ${
-      msg.routeDemand[2]
-    }​ ​​ ​​ <:jj:1135253388855103538> ${
+    Route Demand:   Y ${msg.routeDemand[2]}​ ​​ ​​ J ${
     msg.routeDemand[3]
-  }​ ​​ ​​ ​​ ​​ <:ff:1135253350833729577> ${msg.routeDemand[4]}​ ​​ ​​ ​​ ​​ ​
-    Tickets:          <:yy:1135253605939675138> $${
-      msg.seatPrice[0]
-    }​ <:jj:1135253388855103538> $${
-    msg.seatPrice[1]
-  } <:ff:1135253350833729577> $${msg.seatPrice[2]}
-    Profit Config:    <:yy:1135253605939675138> ${
-      msg.seatLayout[0]
-    }​ ​​ ​​ <:jj:1135253388855103538> ${
+  }​ ​​ ​​ ​​ ​​ F ${msg.routeDemand[4]}​ ​​ ​​ ​​ ​​ ​
+    Tickets:  Y $${msg.seatPrice[0]}​ J $${msg.seatPrice[1]} F $${
+    msg.seatPrice[2]
+  }
+    Profit Config:    Y ${msg.seatLayout[0]}​ ​​ ​​ J ${
     msg.seatLayout[1]
-  }​ ​​ ​​ ​​ ​​ <:ff:1135253350833729577> ${msg.seatLayout[2]}​ ​​ ​​ ​​ ​​ ​
+  }​ ​​ ​​ ​​ ​​ F ${msg.seatLayout[2]}​ ​​ ​​ ​​ ​​ ​
   
     __PROFIT:__  
     :dollar: $${msg.ppf} / Flight
@@ -79,9 +75,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
       res = await Tools.research({
         isReal,
         speedMod,
-        departure,
+        departure: departure.toUpperCase(),
         range,
-        aircraft,
+        aircraft: aircraft.toLowerCase(),
         flpd: flpd || 0,
       });
     } catch (e) {
@@ -99,7 +95,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
       });
       return;
     }
-    console.log(res);
     await interaction.followUp({
       content: formatMsg(res[0], 0),
       ephemeral: true,

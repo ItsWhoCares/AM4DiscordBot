@@ -474,7 +474,7 @@ const Func = {
       try {
         for (let i = maxDist; i >= minDist; i -= 200) {
           // let url = `https://www.airline4.net/api/?access_token=g53urfGFDtreHnXdfWjYTrcGR:465JHTYRdGJSAHjfgcxE21312H&fields=research&dep_icao=${dep}&min_runway=${rwy}&max_distance=${i}`
-          let url = `https://cdn.jsdelivr.net/gh/itswhocares/AM4BOT@main/data/${dep}.json`;
+          let url = `https://cdn.jsdelivr.net/gh/itswhocares/temp@master/${dep}.json`;
           let { status, route } = await fetch(url).then((response) => {
             const res = response.json();
             return res;

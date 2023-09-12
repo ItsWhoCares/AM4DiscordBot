@@ -1008,10 +1008,12 @@ const Tools = {
       //   orderLink: `https://www.airlinemanager.com/ac_order_do.php?id=${acid[aircraft]}&hub=${hubID[departure]}&e=${specificData[1][0]}&b=${specificData[1][1]}&f=${specificData[1][2]}&r=${apname[departure]}%20${acname[aircraft]}%20${airportObject.ic}&engine=${engineID[aircraft]}&amount=1&charter=0&fbSig=false`,
       // };
       let ddp = AirportData[AirportID[departure]];
+      // console.log(ddp);
       let g = {
         to: airportObject.n + ", " + airportObject.c,
         from: ddp[4] + ", " + ddp[3],
         flpd: fl,
+        aircraft: aircraft.toUpperCase(),
         routeDemand: totalDemandArray[i],
         seatLayout: specificData[1],
         seatPrice: specificData[0],
@@ -1038,7 +1040,7 @@ const Tools = {
 
       i++;
       saveData.push(g);
-      console.log(g);
+      //console.log(g);
     }
     // if (flpd) {
     //   saveData = saveData.filter((e) => e.flpd == flpd);
